@@ -25,7 +25,7 @@ export default function HomeScreen() {
         </ThemedText>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Quel temps fait-il</ThemedText>
+        <ThemedText type="subtitle">Quel temps fait-il ?</ThemedText>
       </ThemedView>
     </ParallaxScrollView>
   );

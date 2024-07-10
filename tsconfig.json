@@ -1,17 +1,20 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true,
-    "paths": {
-      "@/*": [
-        "./*"
+      "strict": true,
+      "paths": {
+          "@/*": [
+              "./*"
+          ]
+      },
+      "types": [
+          "moment"  // Ajoutez cette ligne pour inclure les types de moment
       ]
-    }
   },
   "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    ".expo/types/**/*.ts",
-    "expo-env.d.ts"
+      "**/*.ts",
+      "**/*.tsx",
+      ".expo/types/**/*.ts",
+      "expo-env.d.ts"
   ]
 }
