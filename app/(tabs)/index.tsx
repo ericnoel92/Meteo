@@ -11,7 +11,7 @@ export default function HomeScreen() {
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
       headerImage={
         <Image
-          source={require('@/assets/images/OIP.png')}
+          source={require('@/assets/images/Loup-de-voyage.png')}
           style={styles.reactLogo}
         />
       }>
@@ -20,12 +20,17 @@ export default function HomeScreen() {
         <HelloWave />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Bienvenue sur mon Application meteo :)</ThemedText>
+        <ThemedText type="subtitle">Bienvenue sur mon Application de météo et de voyage :)</ThemedText>
         <ThemedText>
         </ThemedText>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Quel temps fait-il ?</ThemedText>
+        <ThemedText type="subtitle">Quel temps fait-il ?
+          Quel métro prendre ?
+        </ThemedText>
+      </ThemedView>
+      <ThemedView style={styles.stepContainer}>
+        <ThemedText type="subtitle">Quel métro prendre ?</ThemedText>
       </ThemedView>
     </ParallaxScrollView>
   );
