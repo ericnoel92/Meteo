@@ -71,11 +71,13 @@ export default class Index extends Component<{}, State> {
         } else if (description.toLowerCase().includes('moderate rain')) {
             return require('@/assets/images/moderate-rain.png');
         } else if (description.toLowerCase().includes('broken clouds')) {
-            return require('@/assets/images/broken-clouds.png'); // Ajoutez l'image pour "broken clouds"
+            return require('@/assets/images/broken-clouds.png');
         } else if (description.toLowerCase().includes('light intensity drizzle')) {
-            return require('@/assets/images/light-intensity-drizzle.png'); // Ajoutez l'image pour "light intensity drizzle"
+            return require('@/assets/images/light-intensity-drizzle.png');
+        } else if (description.toLowerCase().includes('few clouds')) {
+            return require('@/assets/images/Few-clouds.png'); // Ajoutez l'image pour "few clouds"
         } else {
-           // return require('@/assets/images/default.png'); // Image par défaut si la condition n'est pas gérée
+          //  return require('@/assets/images/default.png'); // Image par défaut si la condition n'est pas gérée
         }
     }
 
