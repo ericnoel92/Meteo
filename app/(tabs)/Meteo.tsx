@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 40,
-        borderColor: 'grey',
+        borderColor: 'black',
         borderWidth: 2,
         marginBottom: 10,
         paddingHorizontal: 10,
