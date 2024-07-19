@@ -20,16 +20,18 @@ export default function HomeScreen() {
       
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Bienvenue sur mon application de météo et de voyage :)</ThemedText>
+        <ThemedText type="subtitle">Bienvenue sur mon application :)</ThemedText>
         <ThemedText>
         </ThemedText>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Quel temps fait-il ?
+        <ThemedText type="subtitle">En un seul clic, vous vous retrouverez sur le site avec les informations qui vous intéressent. J'ai créé cette application en pensant à mon premier voyage aux États-Unis et aux sites qui m'étaient utiles.
         </ThemedText>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Quel métro prendre ?</ThemedText>
+        <ThemedText type="subtitle">Quelle est la température actuelle ? Quels restaurants et monuments visiter, et quel est leur temps d'attente ? Quel métro prendre ? (✪‿✪) 
+
+        </ThemedText>
       </ThemedView>
     </ParallaxScrollView>
   );

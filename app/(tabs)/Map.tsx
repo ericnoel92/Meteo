@@ -45,6 +45,15 @@ export default class Map extends Component<{}, State> {
               <Text style={styles.link}>Métro de New York</Text>
             </TouchableOpacity>
           </View>
+          <View style={styles.cityContainer}>
+            <Text style={styles.cityTitle}>Paris</Text>
+            <TouchableOpacity onPress={() => this.openImage(require('@/assets/images/Carte-de-new-york.png'), 'https://www.bing.com/maps?q=Carte+de+new+york+2024+url&FORM=HDRSC7&cp=40.711049%7E-74.006573&lvl=9.4')}>
+              <Text style={styles.link}>Carte de Paris</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.openImage(require('@/assets/images/Plan-Metro-RER-Paris.png'), 'https://www.bing.com/maps?q=carte+de+paris&FORM=HDRSC7&cp=48.874941%7E2.343029&lvl=15.9')}>
+              <Text style={styles.link}>Métro de Paris</Text>
+            </TouchableOpacity>
+          </View>
 
           <View style={styles.cityContainer}>
             <Text style={styles.cityTitle}>Boston</Text>
