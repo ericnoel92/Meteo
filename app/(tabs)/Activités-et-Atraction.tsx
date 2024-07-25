@@ -1,104 +1,155 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, FlatList, StyleSheet, Alert } from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Modal, Linking, ImageBackground } from 'react-native';
 
-// Définir les types
-type GeoapifyFeature = {
-  properties: {
-    place_id: string;
-    name: string;
-    address_line1: string;
-  };
-};
+interface State {
+  modalVisible: boolean;
+  selectedUrl: string | null;
+}
 
-type GeoapifyResponse = {
-  features: GeoapifyFeature[];
-};
+export default class ActivitesEtAttractions extends Component<{}, State> {
+  constructor(props: {}) {
+    super(props);
+    this.state = {
+      modalVisible: false,
+      selectedUrl: null,
+    };
+  }
 
-const API_KEY = 'e1fd35e351114de2b18a710074b7483b'; // Remplacez par votre clé API
-
-const ActivitesEtAttractions: React.FC = () => {
-  const [location, setLocation] = useState('');
-  const [results, setResults] = useState<GeoapifyFeature[]>([]);
-
-  const searchPlaces = async () => {
-    if (!location) {
-      Alert.alert("Erreur", "Veuillez entrer une ville ou un pays.");
-      return;
-    }
-
-    try {
-      console.log(`Recherche pour la localisation: ${location}`);
-      const response = await fetch(
-        `https://api.geoapify.com/v2/places?categories=catering.restaurant,catering.cafe&filter=rect:11.573106549898483,48.13898913611139,11.57704581350751,48.13666585409989&limit=20&apiKey=${API_KEY}`
-      );
-      const data: GeoapifyResponse = await response.json();
-      console.log('Données reçues de l\'API:', data);
-
-      if (data.features) {
-        setResults(data.features);
-      } else {
-        Alert.alert("Erreur", "Aucun résultat trouvé.");
-      }
-    } catch (error) {
-      console.error('Erreur lors de la récupération des données:', error);
-      Alert.alert("Erreur", "Erreur lors de la récupération des données.");
-    }
+  openLink = (url: string): void => {
+    this.setState({ modalVisible: true, selectedUrl: url });
   };
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Rechercher une ville ou un pays</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Entrez une ville ou un pays"
-        value={location}
-        onChangeText={setLocation}
-      />
-      <Button title="Rechercher" onPress={searchPlaces} />
-      <FlatList
-        data={results}
-        keyExtractor={(item) => item.properties.place_id}
-        renderItem={({ item }) => (
-          <View style={styles.item}>
-            <Text style={styles.name}>{item.properties.name}</Text>
-            <Text style={styles.address}>{item.properties.address_line1}</Text>
+  closeModal = (): void => {
+    this.setState({ modalVisible: false, selectedUrl: null });
+  };
+
+  render() {
+    return (
+      <ImageBackground
+        source={require('@/assets/images/Atraction.png')} // Remplacez par le chemin de votre image de fond
+        style={styles.background}
+      >
+        <View style={styles.container}>
+          <Text style={styles.title}>
+            Découvrez les attractions des villes suivantes !
+          </Text>
+
+          <View style={styles.cityContainer}>
+            <Text style={styles.cityTitle}>New York</Text>
+            <TouchableOpacity onPress={() => this.openLink('https://www.centralparknyc.org/')}>
+              <Text style={styles.link}>Central Park</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.openLink('https://www.statueofliberty.org/')}>
+              <Text style={styles.link}>Statue de la Liberté</Text>
+            </TouchableOpacity>
           </View>
-        )}
-      />
-    </View>
-  );
-};
+          <View style={styles.cityContainer}>
+            <Text style={styles.cityTitle}>Paris</Text>
+            <TouchableOpacity onPress={() => this.openLink('https://www.toureiffel.paris/fr')}>
+              <Text style={styles.link}>Tour Eiffel</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.openLink('https://www.louvre.fr/')}>
+              <Text style={styles.link}>Musée du Louvre</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.cityContainer}>
+            <Text style={styles.cityTitle}>Boston</Text>
+            <TouchableOpacity onPress={() => this.openLink('https://www.nps.gov/bost/index.htm')}>
+              <Text style={styles.link}>Freedom Trail</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.openLink('https://www.mfa.org/')}>
+              <Text style={styles.link}>Musée des beaux-arts de Boston</Text>
+            </TouchableOpacity>
+          </View>
+
+          <Modal
+            visible={this.state.modalVisible}
+            transparent={true}
+            onRequestClose={this.closeModal}
+          >
+            <View style={styles.modalContainer}>
+              <TouchableOpacity onPress={() => Linking.openURL(this.state.selectedUrl!)} style={styles.viewOnlineButton}>
+                <Text style={styles.viewOnlineText}>Voir en ligne</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={this.closeModal} style={styles.closeButton}>
+                <Text style={styles.closeButtonText}>Fermer</Text>
+              </TouchableOpacity>
+            </View>
+          </Modal>
+        </View>
+      </ImageBackground>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    resizeMode: 'cover', // ou 'stretch' selon vos besoins
+  },
   container: {
     flex: 1,
-    padding: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
   },
   title: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 16,
+    marginBottom: 20,
+    textAlign: 'center',
+    color: '#ffffff', // Optionnel: Changez la couleur du texte pour améliorer la lisibilité sur le fond
   },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    paddingLeft: 8,
-    marginBottom: 16,
+  cityContainer: {
+    width: '90%',
+    backgroundColor: 'rgba(255, 255, 255, 0.8)', // Optionnel: Ajoutez une couleur de fond avec opacité pour une meilleure lisibilité
+    padding: 20,
+    borderRadius: 10,
+    elevation: 3,
+    marginBottom: 20,
+    alignItems: 'center',
   },
-  item: {
-    padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-  },
-  name: {
+  cityTitle: {
     fontSize: 18,
     fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#333333', // Optionnel: Changez la couleur du texte pour une meilleure lisibilité
   },
-  address: {
+  link: {
     fontSize: 16,
-    color: '#555',
+    color: '#000000', // Optionnel: Changez la couleur des liens pour une meilleure lisibilité
+    marginBottom: 10,
+    textDecorationLine: 'underline',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+  },
+  viewOnlineButton: {
+    backgroundColor: '#ffffff',
+    padding: 10,
+    marginTop: 20,
+    borderRadius: 5,
+    elevation: 2,
+  },
+  viewOnlineText: {
+    fontSize: 16,
+    color: '#0066cc',
+    textAlign: 'center',
+  },
+  closeButton: {
+    backgroundColor: '#ffffff',
+    padding: 10,
+    marginTop: 10,
+    borderRadius: 5,
+    elevation: 2,
+  },
+  closeButtonText: {
+    fontSize: 16,
+    color: '#333333',
+    textAlign: 'center',
   },
 });
-
-export default ActivitesEtAttractions;

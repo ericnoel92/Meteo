@@ -9,7 +9,7 @@ interface State {
     showForecast: boolean;
 }
 
-export default class Index extends Component<{}, State> {
+export default class Meteo extends Component<{}, State> {
     constructor(props: {}) {
         super(props);
         this.state = {

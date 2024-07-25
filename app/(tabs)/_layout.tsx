@@ -28,25 +28,34 @@ export default function TabLayout() {
         options={{
           title: 'Meteo',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+            <TabBarIcon name={focused ? 'cloud' : 'cloud-outline'} color={color} />
           ),
         }}
       />
-       <Tabs.Screen
+      <Tabs.Screen
         name="Map"
         options={{
           title: 'Map',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+            <TabBarIcon name={focused ? 'map' : 'map-outline'} color={color} />
           ),
         }}
       />
       <Tabs.Screen
         name="Activités-et-Atraction"
         options={{
-          title: 'Activités-et-Atraction',
+          title: 'Activités et Attractions',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+            <TabBarIcon name={focused ? 'star' : 'star-outline'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="Inscription"
+        options={{
+          title: 'Inscription',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'person-add' : 'person-add-outline'} color={color} />
           ),
         }}
       />
