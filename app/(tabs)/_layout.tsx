@@ -13,7 +13,8 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
-      }}>
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
@@ -56,6 +57,24 @@ export default function TabLayout() {
           title: 'Inscription',
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? 'person-add' : 'person-add-outline'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="Connexion"
+        options={{
+          title: 'Connexion',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'person-add' : 'person-add-outline'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="Food"
+        options={{
+          title: 'Food',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'restaurant' : 'restaurant-outline'} color={color} />
           ),
         }}
       />

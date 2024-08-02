@@ -1,0 +1,50 @@
+@startuml eric
+actor Utilisateur
+
+participant ConnexionPage
+participant "API Server" as APIServer
+
+Utilisateur -> ConnexionPage: Remplir le formulaire de connexion
+Utilisateur -> ConnexionPage: Appuyer sur "Se connecter"
+activate ConnexionPage
+
+ConnexionPage -> APIServer: GET /utilisateurs
+activate APIServer
+
+alt Réponse OK
+    APIServer -> ConnexionPage: 200 OK (utilisateurs)
+    deactivate APIServer
+    ConnexionPage -> ConnexionPage: Vérifier les informations de connexion
+
+    alt Connexion réussie
+        ConnexionPage -> Utilisateur: Afficher "Connexion réussie"
+        ConnexionPage -> ConnexionPage: Réinitialiser les champs
+        ConnexionPage -> ConnexionPage: navigation.navigate('Jeux') (commenté)
+    else Connexion échouée
+        ConnexionPage -> Utilisateur: Afficher "Email ou mot de passe incorrect"
+    end
+else Erreur
+    APIServer -> ConnexionPage: 4xx/5xx Error
+    deactivate APIServer
+    ConnexionPage -> Utilisateur: Afficher "Erreur lors de la récupération des utilisateurs"
+end
+deactivate ConnexionPage
+
+Utilisateur -> ConnexionPage: Appuyer sur "Supprimer mes infos"
+activate ConnexionPage
+
+ConnexionPage -> APIServer: DELETE /utilisateurs
+activate APIServer
+
+alt Réponse OK
+    APIServer -> ConnexionPage: 200 OK
+    deactivate APIServer
+    ConnexionPage -> Utilisateur: Afficher "Informations supprimées"
+    ConnexionPage -> ConnexionPage: Réinitialiser les champs
+else Erreur
+    APIServer -> ConnexionPage: 4xx/5xx Error
+    deactivate APIServer
+    ConnexionPage -> Utilisateur: Afficher "Erreur lors de la suppression des informations"
+end
+deactivate ConnexionPage
+@enduml

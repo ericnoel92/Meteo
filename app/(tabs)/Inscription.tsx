@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+const API_URL = 'http://192.168.1.56:3000'; // Utilisez cette IP
+
 const InscriptionPage: React.FC = () => {
   const [nom, setNom] = useState<string>('');
   const [prenom, setPrenom] = useState<string>('');
@@ -12,7 +14,7 @@ const InscriptionPage: React.FC = () => {
   const handleSubmit = async () => {
     if (nom && prenom && email && motDePasse) {
       try {
-        const response = await fetch('http://192.168.5.31:3000/utilisateurs', { // Remplacez par l'adresse IP correcte
+        const response = await fetch(`${API_URL}/utilisateurs`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -26,7 +28,6 @@ const InscriptionPage: React.FC = () => {
         });
 
         if (response.ok) {
-          // Réinitialisation des champs du formulaire après une inscription réussie
           setNom('');
           setPrenom('');
           setEmail('');
