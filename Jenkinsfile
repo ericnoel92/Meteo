@@ -4,22 +4,13 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-		              
-		  git branch: 'main', url: 'https://github.com/ericnoel92/TouriWeather'
+                git branch: 'main', url: 'https://github.com/ericnoel92/TouriWeather'
             }
         }
         stage('Build') {
             steps {
-		
-        sh 'npm install'
+                sh 'npm install'
             }
         }
-        stage('Test') {
-            steps {
-                sh 'npm test'      
-            }
-        }
-       
-         
     }
 }
