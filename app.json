@@ -12,14 +12,14 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "ios": {
-      "supportsTablet": true
-    },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/New-york-et-boston.png",
         "backgroundColor": "grey"
-      }
+      },
+      "package": "com.yourcompany.meteo",
+      "versionCode": 1,
+      "permissions": []
     },
     "web": {
       "bundler": "metro",

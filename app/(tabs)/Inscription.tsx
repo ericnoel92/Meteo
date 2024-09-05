@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const API_URL = 'http://192.168.1.56:3000'; // Utilisez cette IP
+const API_URL = 'http://192.168.5.28:3000'; // Assurez-vous que l'API est accessible
 
 const InscriptionPage: React.FC = () => {
   const [nom, setNom] = useState<string>('');
@@ -36,7 +36,7 @@ const InscriptionPage: React.FC = () => {
           const data = await response.json();
           console.log('Réponse de l\'API:', data);
           Alert.alert('Succès', 'Inscription réussie.');
-          // navigation.navigate('Connexion'); // Décommentez cette ligne pour naviguer vers la page de connexion
+          // navigation.navigate('Connexion'); // Décommentez pour naviguer après inscription
         } else {
           const errorData = await response.json();
           console.error('Erreur lors de la requête:', response.status, errorData);
